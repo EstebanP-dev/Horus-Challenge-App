@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="Mobile.Views.Inputs.InputLayout"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Margin="0,10,0,0"
+    RowDefinitions="auto,auto,auto">
+    <Label
+        x:Name="HintLabel"
+        Grid.Row="0"
+        Margin="15,0,0,0"
+        TextColor="{StaticResource SecondaryDarkText}"
+        VerticalOptions="Center">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualState x:Name="Default" />
+                <VisualState x:Name="Error">
+                    <VisualState.Setters>
+                        <Setter TargetName="HintLabel" Property="TextColor" Value="{StaticResource Error}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Label>
+
+    <Border Grid.Row="1" Padding="8,5">
+        <Grid ColumnDefinitions="*,auto">
+            <ContentView x:Name="BorderInput" Grid.Column="0" />
+            <ImageButton
+                x:Name="ActionIconButton"
+                Grid.Column="1"
+                Aspect="AspectFit"
+                BackgroundColor="Transparent"
+                CornerRadius="0"
+                HeightRequest="40"
+                IsVisible="False"
+                WidthRequest="40" />
+        </Grid>
+    </Border>
+
+
+
+    <Label
+        x:Name="ErrorLabel"
+        Grid.Row="12"
+        IsVisible="False"
+        TextColor="{StaticResource Error}" />
+</Grid>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:RichContentPage
+    x:Class="Mobile.Features.Authentication.LogIn.LogInPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:extensions="clr-namespace:Mobile.MarkupExtensions"
+    xmlns:inputs="clr-namespace:Mobile.Views.Inputs"
+    xmlns:local="clr-namespace:Mobile.Features.Authentication.LogIn"
+    xmlns:pages="clr-namespace:Mobile.Pages"
+    xmlns:resource="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:strings="clr-namespace:Mobile.Resources.Strings"
+    Title="LogInPage"
+    x:DataType="local:LogInPageViewModel"
+    BindingContext="{extensions:ResolveViewModel ViewModel={x:Type local:LogInPageViewModel}}"
+    Shell.NavBarIsVisible="False">
+    <pages:RichContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="Divider" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="HeightRequest" Value="1" />
+            </Style>
+        </ResourceDictionary>
+    </pages:RichContentPage.Resources>
+    <ScrollView>
+        <Grid RowDefinitions="*,auto">
+            <!--#region Background-->
+            <Border>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0,0,40,40" />
+                </Border.StrokeShape>
+                <Image Aspect="AspectFill" Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Background}}" />
+            </Border>
+            <VerticalStackLayout
+                Grid.Row="0"
+                Margin="10"
+                HorizontalOptions="Start"
+                VerticalOptions="End">
+                <Label
+                    Style="{StaticResource SubHeadline}"
+                    Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInHeadLineLabel}}"
+                    TextColor="{StaticResource Tertiary}"
+                    VerticalOptions="Center" />
+                <Image Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Logo}}" />
+            </VerticalStackLayout>
+            <!--#endregion-->
+
+            <VerticalStackLayout
+                Grid.Row="1"
+                Padding="50"
+                VerticalOptions="End">
+                <!--#region Form-->
+                <inputs:TextInput Hint="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormEmailHint}}" Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormEmailPlaceholder}}" />
+                <inputs:TextInput
+                    Hint="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormPasswordHint}}"
+                    IsPassword="True"
+                    Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormPasswordPlaceholder}}" />
+                <Label Margin="15,0,0,0" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormForgottenPasswordLabel}}" />
+                <!--#endregion-->
+
+                <!--#region Submit-->
+                <Button Command="{Binding LogInCommand}" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignInButton}}" />
+                <!--#endregion-->
+
+                <!--#region Social-->
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="50">
+                    <ImageButton Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Instagram}}" />
+                    <ImageButton Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Facebook}}" />
+                </HorizontalStackLayout>
+                <!--#endregion-->
+
+                <BoxView Style="{StaticResource Divider}" />
+
+                <!--#region SignUp-->
+                <Button Style="{StaticResource SecondaryButton}" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignUpButton}}" />
+                <!--#endregion-->
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</pages:RichContentPage>

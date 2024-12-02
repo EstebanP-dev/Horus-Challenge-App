@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<input:InputLayout
+    x:Class="Mobile.Views.Inputs.TextInput"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:input="clr-namespace:Mobile.Views.Inputs"
+    xmlns:resource="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:strings="clr-namespace:Mobile.Resources.Strings"
+    x:Name="This"
+    x:DataType="input:TextInput"
+    ActionIconCommand="{Binding ChangePasswordVisibilityStatusCommand}">
+    <input:InputLayout.View>
+        <Entry x:Name="Element" />
+    </input:InputLayout.View>
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="PasswordStates">
+                <VisualState x:Name="Shown">
+                    <VisualState.Setters>
+                        <Setter TargetName="This" Property="ActionIconSource" Value="{resource:Translate Text={x:Static strings:AppImageStringKeys.EyeNone}}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Hidden">
+                    <VisualState.Setters>
+                        <Setter TargetName="This" Property="ActionIconSource" Value="{resource:Translate Text={x:Static strings:AppImageStringKeys.Eye}}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+</input:InputLayout>

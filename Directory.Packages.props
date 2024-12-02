@@ -1,0 +1,33 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <ExtensionsVersion>9.0.0</ExtensionsVersion>
+    <MauiVersion>9.0.10</MauiVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Maui -->
+    <PackageVersion Include="Acr.UserDialogs.Maui" Version="9.1.0" />
+    <PackageVersion Include="CommunityToolkit.Maui" Version="9.1.1" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageVersion Include="LocalizationResourceManager.Maui" Version="1.2.1" />
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageVersion Include="Microsoft.Maui.Controls.Core" Version="$(MauiVersion)" />
+    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
+    <!-- Maui -->
+    <!-- Extensions -->
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="$(ExtensionsVersion)" />
+    <!-- Extensions -->
+    <!-- Networking -->
+    <PackageVersion Include="Refit.HttpClientFactory" Version="8.0.0" />
+    <!-- Networking -->
+    <!-- Tools -->
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.3.0.106239" />
+    <!-- Tools -->
+    <!-- Use Cases -->
+    <PackageVersion Include="FluentValidation" Version="11.11.0" />
+    <PackageVersion Include="MediatR" Version="12.4.1" />
+    <!-- Use Cases -->
+  </ItemGroup>
+</Project>

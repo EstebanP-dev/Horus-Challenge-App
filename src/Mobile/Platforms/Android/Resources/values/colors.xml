@@ -1,0 +1,6 @@
+<resources>  
+   <color name="colorPrimary">#F49390</color>  
+   <color name="colorPrimaryDark">#F49390</color>  
+   <color name="colorAccent">#1A1A1A</color>  
+   <color name="customColorActivatedHighlight">#00000000</color>
+</resources>

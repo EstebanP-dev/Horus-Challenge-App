@@ -1,0 +1,28 @@
+<Project>
+    <PropertyGroup>
+	    <NetVersion>net9.0</NetVersion>
+
+	    <ImplicitUsings>true</ImplicitUsings>
+	    <Nullable>enable</Nullable>
+	    <NeutralLanguage>es-MX</NeutralLanguage>
+	    <DefaultLanguage>es</DefaultLanguage>
+	    <AnalysisLevel>latest</AnalysisLevel>
+	    <AnalysisMode>All</AnalysisMode>
+	    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+	    <NoWarn>S2325;CS1591;CA1515;IDE0160;XC0103</NoWarn>
+	    <IsPackable>True</IsPackable>
+    </PropertyGroup>
+	
+	<ItemGroup>
+		<Using Include="System.Reflection" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
+		<PackageReference Include="SonarAnalyzer.CSharp">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentFiles; analyzers; buildTransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+</Project>

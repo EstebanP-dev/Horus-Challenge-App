@@ -1,0 +1,18 @@
+<Project>
+    <PropertyGroup>
+	    <XamlCompilationOptions>Compile</XamlCompilationOptions>
+	    <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
+    </PropertyGroup>
+	<ItemGroup>
+        <EmbeddedResource Include="**/*.json" Exclude="**/bin/**;**/obj/**">
+			<DependentUpon Condition="$([System.String]::Copy(%(Filename)).EndsWith('Development'))">$([System.String]::Copy(%(Filename)).Replace('Development', 'json'))</DependentUpon>
+        </EmbeddedResource>
+        <EmbeddedResource Update="**\*.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>%(Filename).Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <Compile Update="**\*Designer.cs">
+            <DependentUpon>$([System.String]::Copy(%(Filename)).Replace('.Designer', '.resx'))</DependentUpon>
+        </Compile>
+    </ItemGroup>
+</Project>

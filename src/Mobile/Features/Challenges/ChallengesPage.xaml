@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:RichContentPage
+    x:Class="Mobile.Features.Challenges.ChallengesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:challenges="clr-namespace:Mobile.Features.Challenges"
+    xmlns:extensions="clr-namespace:Mobile.MarkupExtensions"
+    xmlns:local="clr-namespace:Mobile.Features.Challenges"
+    xmlns:pages="clr-namespace:Mobile.Pages"
+    xmlns:resources="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+    xmlns:strings="clr-namespace:Mobile.Resources.Strings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="This"
+    x:DataType="local:ChallengesPageViewModel"
+    BindingContext="{extensions:ResolveViewModel ViewModel={x:Type local:ChallengesPageViewModel}}"
+    OnInitializedCommand="{Binding OnInitializeCommand}">
+    <pages:RichContentPage.Resources>
+        <ResourceDictionary>
+            <!--#region Pending Template-->
+            <DataTemplate x:Key="PendingTemplate" x:DataType="challenges:ChallengeViewModel">
+                <ViewCell>
+                    <Grid Padding="20">
+                        <Border Padding="10">
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="{StaticResource BlackBrush}"
+                                    Opacity="0.2"
+                                    Offset="1,1" />
+                            </Border.Shadow>
+                            <Grid
+                                ColumnDefinitions="*,auto"
+                                ColumnSpacing="20"
+                                RowDefinitions="auto,auto,auto,auto">
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Style="{StaticResource Title}"
+                                    Text="{Binding Title}"
+                                    VerticalTextAlignment="Center" />
+                                <ImageButton
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    HorizontalOptions="End"
+                                    Source="{resources:Translate Text={x:Static strings:AppImageStringKeys.ArrowRightGray}}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="{Binding Description}" />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Margin="0,30,0,0"
+                                    VerticalTextAlignment="End">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding CurrentPoints}" />
+                                            <Span Text="/" />
+                                            <Span Text="{Binding TotalPoints}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding Percentage, StringFormat='{0:P0}'}"
+                                    TextColor="{StaticResource Primary}"
+                                    VerticalTextAlignment="End" />
+                                <ProgressBar
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    HorizontalOptions="Fill"
+                                    Progress="{Binding Percentage}"
+                                    VerticalOptions="Fill" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <!--#endregion-->
+            <!--#region Completed Template-->
+            <DataTemplate x:Key="CompletedTemplate" x:DataType="challenges:ChallengeViewModel">
+                <ViewCell>
+                    <Grid Padding="20">
+                        <Border Padding="10" BackgroundColor="{StaticResource Primary}">
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="{StaticResource BlackBrush}"
+                                    Opacity="0.2"
+                                    Offset="1,1" />
+                            </Border.Shadow>
+                            <Grid
+                                ColumnDefinitions="*,auto"
+                                ColumnSpacing="20"
+                                RowDefinitions="auto,auto,auto,auto">
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Style="{StaticResource Title}"
+                                    Text="{Binding Title}"
+                                    TextColor="{StaticResource Tertiary}"
+                                    VerticalTextAlignment="Center" />
+                                <ImageButton
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"
+                                    Source="{resources:Translate Text={x:Static strings:AppImageStringKeys.ArrowRightWhite}}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="{Binding Description}"
+                                    TextColor="{StaticResource Tertiary}" />
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Margin="0,30,0,0"
+                                    TextColor="{StaticResource Tertiary}"
+                                    VerticalTextAlignment="End">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding CurrentPoints}" />
+                                            <Span Text="/" />
+                                            <Span Text="{Binding TotalPoints}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="End"
+                                    Text="{Binding Percentage, StringFormat='{0:P0}'}"
+                                    TextColor="{StaticResource Tertiary}"
+                                    VerticalTextAlignment="End" />
+                                <ProgressBar
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="Fill"
+                                    Progress="{Binding Percentage}"
+                                    ProgressColor="{StaticResource Tertiary}"
+                                    VerticalOptions="Fill" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                </ViewCell>
+            </DataTemplate>
+            <!--#endregion-->
+            <local:ChallengeTemplateSelector
+                x:Key="ChallengeTemplate"
+                CompletedTemplate="{StaticResource CompletedTemplate}"
+                PendingTemplate="{StaticResource PendingTemplate}" />
+        </ResourceDictionary>
+    </pages:RichContentPage.Resources>
+    <Grid ColumnDefinitions="*,auto" RowDefinitions="auto,*,20">
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="20,0,0,0"
+            Style="{StaticResource Headline}"
+            Text="Retos"
+            VerticalTextAlignment="End" />
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="0,0,20,0"
+            Style="{StaticResource SubTitle}"
+            VerticalTextAlignment="End">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding Challenges.CompletedChallenges}" TextColor="{StaticResource Primary}" />
+                    <Span Text="/" />
+                    <Span Text="{Binding Challenges.Count}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <ListView
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemTemplate="{StaticResource ChallengeTemplate}"
+            ItemsSource="{Binding Challenges}"
+            SelectedItem="{Binding SelectedChallenge}"
+            SelectionMode="Single">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior Command="{Binding SelectedChallengeCommand}" EventName="ItemSelected" />
+            </ListView.Behaviors>
+        </ListView>
+    </Grid>
+</pages:RichContentPage>
