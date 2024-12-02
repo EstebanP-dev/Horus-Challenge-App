@@ -2,8 +2,7 @@
 /// <summary>
 /// A delegating handler that adds headers to HTTP requests.
 /// </summary>
-internal sealed class HeaderDelegatingHandler()
-    : DelegatingHandler
+internal sealed class HeaderDelegatingHandler : DelegatingHandler
 {
     /// <summary>
     /// Sends an HTTP request with added headers and returns the response.
