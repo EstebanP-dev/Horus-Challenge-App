@@ -70,6 +70,15 @@ namespace Mobile.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Algo salió mal, intenta más tarde..
+        /// </summary>
+        internal static string General_WebService_UnexpectedResponse {
+            get {
+                return ResourceManager.GetString("General_WebService_UnexpectedResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string LogIn_Form_Email_Hint {
@@ -84,6 +93,24 @@ namespace Mobile.Resources.Strings {
         internal static string LogIn_Form_Email_Placeholder {
             get {
                 return ResourceManager.GetString("LogIn_Form_Email_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El email es inválido..
+        /// </summary>
+        internal static string LogIn_Form_Email_Validation_InvalidFormat {
+            get {
+                return ResourceManager.GetString("LogIn_Form_Email_Validation_InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El email es requerido..
+        /// </summary>
+        internal static string LogIn_Form_Email_Validation_Required {
+            get {
+                return ResourceManager.GetString("LogIn_Form_Email_Validation_Required", resourceCulture);
             }
         }
         
@@ -111,6 +138,24 @@ namespace Mobile.Resources.Strings {
         internal static string LogIn_Form_Password_Placeholder {
             get {
                 return ResourceManager.GetString("LogIn_Form_Password_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La contraseña es inválida..
+        /// </summary>
+        internal static string LogIn_Form_Password_Validation_InvalidFormat {
+            get {
+                return ResourceManager.GetString("LogIn_Form_Password_Validation_InvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La contraseña es requerida..
+        /// </summary>
+        internal static string LogIn_Form_Password_Validation_Required {
+            get {
+                return ResourceManager.GetString("LogIn_Form_Password_Validation_Required", resourceCulture);
             }
         }
         

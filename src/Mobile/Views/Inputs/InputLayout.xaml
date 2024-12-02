@@ -38,8 +38,6 @@
         </Grid>
     </Border>
 
-
-
     <Label
         x:Name="ErrorLabel"
         Grid.Row="12"

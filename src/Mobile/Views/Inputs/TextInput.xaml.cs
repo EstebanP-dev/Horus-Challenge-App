@@ -16,11 +16,6 @@ public partial class TextInput : InputLayout
         InitializeComponent();
 
         Element.SetVisualElementBinding();
-        Element.SetBinding(
-            Entry.TextProperty,
-            nameof(Entry.Text),
-            BindingMode.TwoWay);
-        Element.BindingContext = this;
     }
 
     #region Text
@@ -34,8 +29,8 @@ public partial class TextInput : InputLayout
             typeof(string),
             typeof(TextInput),
             string.Empty,
-            propertyChanged: TextChanged,
-            defaultBindingMode: BindingMode.TwoWay);
+            BindingMode.TwoWay,
+            propertyChanged: TextChanged);
 
     /// <summary>
     /// Gets or sets the text value of the input.

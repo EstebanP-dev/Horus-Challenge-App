@@ -3,6 +3,7 @@
     x:Class="Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:authentication="clr-namespace:Mobile.Features.Authentication"
     xmlns:challenges="clr-namespace:Mobile.Features.Challenges"
     xmlns:logIn="clr-namespace:Mobile.Features.Authentication.LogIn"
     Title="Mobile"

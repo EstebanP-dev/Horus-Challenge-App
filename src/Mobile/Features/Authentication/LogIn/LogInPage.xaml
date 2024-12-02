@@ -3,6 +3,7 @@
     x:Class="Mobile.Features.Authentication.LogIn.LogInPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Mobile.Converters"
     xmlns:extensions="clr-namespace:Mobile.MarkupExtensions"
     xmlns:inputs="clr-namespace:Mobile.Views.Inputs"
     xmlns:local="clr-namespace:Mobile.Features.Authentication.LogIn"
@@ -12,6 +13,7 @@
     Title="LogInPage"
     x:DataType="local:LogInPageViewModel"
     BindingContext="{extensions:ResolveViewModel ViewModel={x:Type local:LogInPageViewModel}}"
+    OnInitializedCommand="{Binding OnInitializedCommand}"
     Shell.NavBarIsVisible="False">
     <pages:RichContentPage.Resources>
         <ResourceDictionary>
@@ -20,6 +22,7 @@
                 <Setter Property="HorizontalOptions" Value="Fill" />
                 <Setter Property="HeightRequest" Value="1" />
             </Style>
+            <converters:ShowErrorConverter x:Key="ShowErrorConverter" />
         </ResourceDictionary>
     </pages:RichContentPage.Resources>
     <ScrollView>
@@ -50,11 +53,17 @@
                 Padding="50"
                 VerticalOptions="End">
                 <!--#region Form-->
-                <inputs:TextInput Hint="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormEmailHint}}" Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormEmailPlaceholder}}" />
                 <inputs:TextInput
+                    Error="{Binding ValidationResult, Converter={StaticResource ShowErrorConverter}, ConverterParameter={x:Static local:LogInPageViewModelValidator.EmailPropertyName}}"
+                    Hint="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormEmailHint}}"
+                    Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormEmailPlaceholder}}"
+                    Text="{Binding Email}" />
+                <inputs:TextInput
+                    Error="{Binding ValidationResult, Converter={StaticResource ShowErrorConverter}, ConverterParameter={x:Static local:LogInPageViewModelValidator.PasswordPropertyName}}"
                     Hint="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormPasswordHint}}"
                     IsPassword="True"
-                    Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormPasswordPlaceholder}}" />
+                    Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormPasswordPlaceholder}}"
+                    Text="{Binding Password}" />
                 <Label Margin="15,0,0,0" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormForgottenPasswordLabel}}" />
                 <!--#endregion-->
 

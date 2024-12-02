@@ -144,4 +144,19 @@
   <data name="LogIn_HeadLine_Label" xml:space="preserve">
     <value>Bienvenido a</value>
   </data>
+  <data name="General_WebService_UnexpectedResponse" xml:space="preserve">
+    <value>Algo salió mal, intenta más tarde.</value>
+  </data>
+  <data name="LogIn_Form_Email_Validation_Required" xml:space="preserve">
+    <value>El email es requerido.</value>
+  </data>
+  <data name="LogIn_Form_Password_Validation_Required" xml:space="preserve">
+    <value>La contraseña es requerida.</value>
+  </data>
+  <data name="LogIn_Form_Email_Validation_InvalidFormat" xml:space="preserve">
+    <value>El email es inválido.</value>
+  </data>
+  <data name="LogIn_Form_Password_Validation_InvalidFormat" xml:space="preserve">
+    <value>La contraseña es inválida.</value>
+  </data>
 </root>

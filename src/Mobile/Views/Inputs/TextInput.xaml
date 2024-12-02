@@ -8,9 +8,9 @@
     xmlns:strings="clr-namespace:Mobile.Resources.Strings"
     x:Name="This"
     x:DataType="input:TextInput"
-    ActionIconCommand="{Binding ChangePasswordVisibilityStatusCommand}">
+    ActionIconCommand="{Binding ChangePasswordVisibilityStatusCommand, Source={x:Reference This}}">
     <input:InputLayout.View>
-        <Entry x:Name="Element" />
+        <Entry x:Name="Element" Text="{Binding Text, Source={x:Reference This}}" />
     </input:InputLayout.View>
     <VisualStateManager.VisualStateGroups>
         <VisualStateGroupList>

@@ -6,7 +6,7 @@ namespace Mobile.Views.Inputs;
 /// <summary>
 /// Represents a custom input layout that inherits from the Grid class.
 /// </summary>
-public partial class InputLayout
+public partial class InputLayout : Grid
 {
     #region View
 
@@ -118,7 +118,6 @@ public partial class InputLayout
     public InputLayout()
     {
         InitializeComponent();
-        BindingContext = this;
     }
 
     #region Changed Events
