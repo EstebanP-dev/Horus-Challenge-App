@@ -7,6 +7,7 @@
     Title="LogInPage"
     x:Class="Mobile.Features.Authentication.LogIn.LogInPage"
     x:DataType="local:LogInPageViewModel"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:converters="clr-namespace:Mobile.Converters"
     xmlns:extensions="clr-namespace:Mobile.MarkupExtensions"
@@ -24,6 +25,7 @@
                 <Setter Property="HeightRequest" Value="1" />
             </Style>
             <converters:ShowErrorConverter x:Key="ShowErrorConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </pages:RichContentPage.Resources>
     <ScrollView Margin="0" Padding="0">
@@ -38,7 +40,7 @@
             <VerticalStackLayout
                 Grid.Row="0"
                 HorizontalOptions="Start"
-                Margin="{x:OnPlatform Android=10,
+                Margin="{x:OnPlatform Android=5,
                                       iOS=5}"
                 VerticalOptions="End">
                 <Label
@@ -67,24 +69,29 @@
                     IsPassword="True"
                     Placeholder="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormPasswordPlaceholder}}"
                     Text="{Binding Password}" />
-                <Label Margin="15,0,0,0" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormForgottenPasswordLabel}}" />
+                <Label Margin="15,0,0,0" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormForgottenPasswordLabel}}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowViewNameOrTextCommand}" CommandParameter="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormForgottenPasswordLabel}}" />
+                    </Label.GestureRecognizers>
+                </Label>
                 <!--#endregion-->
 
                 <!--#region Submit-->
-                <Button Command="{Binding LogInCommand}" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignInButton}}" />
+                <Button IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}" Command="{Binding LogInCommand}" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignInButton}}" />
                 <!--#endregion-->
 
                 <!--#region Social-->
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="50">
-                    <ImageButton Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Instagram}}" />
-                    <ImageButton Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Facebook}}" />
+                    <ImageButton Command="{Binding ShowViewNameOrTextCommand}" CommandParameter="Instagram Button" Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Instagram}}" />
+                    <ImageButton Command="{Binding ShowViewNameOrTextCommand}" CommandParameter="Facebook Button" Source="{resource:Translate Text={x:Static strings:AppImageStringKeys.Facebook}}" />
                 </HorizontalStackLayout>
                 <!--#endregion-->
 
                 <BoxView Style="{StaticResource Divider}" />
 
                 <!--#region SignUp-->
-                <Button Style="{StaticResource SecondaryButton}" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignUpButton}}" />
+                <!-- There is a bug on CommandParamater using binding with source reference either with Reference or RelativeSource. -->
+                <Button x:Name="SignUpButton" Command="{Binding ShowViewNameOrTextCommand}" CommandParameter="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignUpButton}}" Style="{StaticResource SecondaryButton}" Text="{resource:Translate Text={x:Static strings:AppStringKeys.LogInFormSignUpButton}}" />
                 <!--#endregion-->
             </VerticalStackLayout>
         </Grid>

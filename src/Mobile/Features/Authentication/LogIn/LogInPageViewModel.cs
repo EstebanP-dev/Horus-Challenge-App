@@ -17,6 +17,9 @@ internal sealed partial class LogInPageViewModel(
     private string _password = string.Empty;
 
     [ObservableProperty]
+    private bool _isBusy;
+
+    [ObservableProperty]
     private ValidationResult? _validationResult;
 
     public IAsyncRelayCommand LogInCommand => new AsyncRelayCommand(LogInAsync);
@@ -27,22 +30,21 @@ internal sealed partial class LogInPageViewModel(
     {
         var validator = new LogInPageViewModelValidator(resources);
 
-        try
-        {
-            ValidationResult = await validator.ValidateAsync(this, cancellationToken);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        ValidationResult = await validator.ValidateAsync(this, cancellationToken);
 
         if (!ValidationResult.IsValid)
         {
             return;
         }
 
+        if (IsBusy)
+        {
+            return;
+        }
+
         Result result;
+
+        IsBusy = true;
 
         using (userDialogs.Loading())
         {
@@ -53,6 +55,8 @@ internal sealed partial class LogInPageViewModel(
                     cancellationToken)
                 .ConfigureAwait(false);
         }
+
+        IsBusy = false;
 
         if (result.IsFailure)
         {
@@ -87,7 +91,7 @@ internal sealed partial class LogInPageViewModel(
     private async Task OnNavigateFromAsync(CancellationToken cancellationToken)
     {
         Result result;
-        
+
         using (userDialogs.Loading())
         {
             result = await sender.Send(new LogOutCommand(), cancellationToken);
@@ -97,5 +101,14 @@ internal sealed partial class LogInPageViewModel(
         {
             _ = userDialogs.Toast(result.FirstError?.Description ?? "Error", TimeSpan.FromSeconds(2));
         }
+    }
+
+    [RelayCommand]
+    private async Task ShowViewNameOrTextAsync(string content)
+    {
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            await userDialogs.AlertAsync(content, "Has Presionado:", "Cerrar");
+        });
     }
 }

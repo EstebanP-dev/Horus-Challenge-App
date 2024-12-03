@@ -8,16 +8,27 @@ internal sealed partial class ChallengesPageViewModel(
     : ObservableObject
 {
     [ObservableProperty]
+    private bool _isBusy;
+
+    [ObservableProperty]
     private ChallengeViewModel? _selectedChallenge;
 
     [ObservableProperty]
     private ChallengeViewModelCollection _challenges = [];
 
     public IAsyncRelayCommand OnInitializeCommand => new AsyncRelayCommand(OnInitializeAsync);
+    public IAsyncRelayCommand RefreshCommand => new AsyncRelayCommand(RefreshAsync);
     public IAsyncRelayCommand SelectedChallengeCommand => new AsyncRelayCommand(SelectedChallengeAsync);
 
     private async Task OnInitializeAsync(CancellationToken cancellationToken)
     {
+        if (IsBusy)
+        {
+            return;
+        }
+
+        IsBusy = true;
+
         Result<IEnumerable<GetChallengesResponse>> result;
 
         using (userDialogs.Loading())
@@ -46,12 +57,20 @@ internal sealed partial class ChallengesPageViewModel(
             }
         }
 
+        IsBusy = false;
+
         if (result.IsFailure)
         {
             _ = userDialogs.Toast(
                 result.FirstError?.Description ?? "Error",
                 TimeSpan.FromSeconds(2));
         }
+    }
+
+    private async Task RefreshAsync(CancellationToken cancellationToken)
+    {
+        Challenges.Clear();
+        await OnInitializeAsync(cancellationToken);
     }
 
     private async Task SelectedChallengeAsync(CancellationToken cancellationToken)

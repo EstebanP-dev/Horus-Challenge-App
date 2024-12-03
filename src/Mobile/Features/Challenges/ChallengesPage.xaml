@@ -181,6 +181,9 @@
         </Label>
         <ListView
             Grid.Row="1"
+            IsRefreshing="{Binding IsBusy}"
+            RefreshAllowed="True"
+            RefreshCommand="{Binding RefreshCommand}"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             ItemTemplate="{StaticResource ChallengeTemplate}"

@@ -6,8 +6,13 @@
     xmlns:authentication="clr-namespace:Mobile.Features.Authentication"
     xmlns:challenges="clr-namespace:Mobile.Features.Challenges"
     xmlns:logIn="clr-namespace:Mobile.Features.Authentication.LogIn"
+    xmlns:strings="using:Mobile.Resources.Strings"
+    xmlns:resources="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
     Title="Mobile"
     FlyoutBehavior="Disabled">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="{resources:Translate Text={x:Static strings:AppImageStringKeys.Back}}" />
+    </Shell.BackButtonBehavior>
 
     <ShellContent Title="Log In" ContentTemplate="{DataTemplate logIn:LogInPage}" />
     <ShellContent Title="Challenges" ContentTemplate="{DataTemplate challenges:ChallengesPage}" />
