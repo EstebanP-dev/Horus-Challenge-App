@@ -24,22 +24,18 @@ public sealed class ShowErrorConverter : IValueConverter
         {
             return null;
         }
-
-        if (parameter is null)
+        
+        if (parameter is not string property)
         {
             return null;
         }
 
-        string? property = parameter as string;
-
-        return validationResult
+        ValidationFailure? result = validationResult
             .Errors
-            .SingleOrDefault(
-                x => x
-                    .PropertyName
-                    .Split(".")
-                    .LastOrDefault() == property)?
-            .ErrorMessage;
+            .First(x => x.PropertyName
+                .Equals(property, StringComparison.OrdinalIgnoreCase));
+
+        return result?.ErrorMessage;
     }
 
     /// <summary>

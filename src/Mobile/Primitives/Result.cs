@@ -13,7 +13,9 @@ public class Result
     /// <summary>
     /// Gets a value indicating whether the operation failed.
     /// </summary>
+#pragma warning disable IDE0055
     public bool IsFailure => !IsSuccess;
+#pragma warning restore IDE0055
 
     /// <summary>
     /// Gets the errors associated with the result.

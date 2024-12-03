@@ -62,7 +62,9 @@ public sealed class Result<TValue> : Result
     [NotNull]
     public TValue Value => _value is not null
         ? _value
+#pragma warning disable IDE0055
         : throw new InvalidOperationException("The value of a failure result cannot be accessed.");
+#pragma warning restore IDE0055
 
     /// <summary>
     /// Implicitly converts a value to a <see cref="Result{TValue}"/>.

@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using Mobile.Features.Authentication.GetAuthenticationState;
+using Mobile.Features.Authentication.LogOut;
 
 namespace Mobile.Features.Authentication.LogIn;
 
@@ -20,12 +21,21 @@ internal sealed partial class LogInPageViewModel(
 
     public IAsyncRelayCommand LogInCommand => new AsyncRelayCommand(LogInAsync);
     public IAsyncRelayCommand OnInitializedCommand => new AsyncRelayCommand(OnInitializedAsync);
+    public IAsyncRelayCommand OnNavigatedFromCommand => new AsyncRelayCommand(OnNavigateFromAsync);
 
     private async Task LogInAsync(CancellationToken cancellationToken)
     {
         var validator = new LogInPageViewModelValidator(resources);
 
-        ValidationResult = await validator.ValidateAsync(this, cancellationToken);
+        try
+        {
+            ValidationResult = await validator.ValidateAsync(this, cancellationToken);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         if (!ValidationResult.IsValid)
         {
@@ -72,5 +82,20 @@ internal sealed partial class LogInPageViewModel(
         {
             await Shell.Current.GoToAsync(AppRoutes.Challenges);
         });
+    }
+
+    private async Task OnNavigateFromAsync(CancellationToken cancellationToken)
+    {
+        Result result;
+        
+        using (userDialogs.Loading())
+        {
+            result = await sender.Send(new LogOutCommand(), cancellationToken);
+        }
+
+        if (result.IsFailure)
+        {
+            _ = userDialogs.Toast(result.FirstError?.Description ?? "Error", TimeSpan.FromSeconds(2));
+        }
     }
 }

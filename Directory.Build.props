@@ -11,7 +11,7 @@
 	    <GenerateDocumentationFile>True</GenerateDocumentationFile>
 	    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-	    <NoWarn>S2325;CS1591;CA1515;IDE0160;XC0103</NoWarn>
+	    <NoWarn>S2325;CS1591;CA1515;IDE0160;XC0103;IDE0055</NoWarn>
 	    <IsPackable>True</IsPackable>
     </PropertyGroup>
 	
